@@ -1,4 +1,4 @@
-package com.example.DonationManager.infrastructure.persistence.mongo.documents;
+package com.example.DonationManager.infrastructure.mongo.documents;
 
 import com.example.DonationManager.domain.Donation;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.example.DonationManager.application.Donation;
 
 import com.example.DonationManager.domain.Donation;
-import com.example.DonationManager.infrastructure.persistence.mongo.documents.DonationDocument;
-import com.example.DonationManager.infrastructure.persistence.mongo.repositories.DonationRepository;
+import com.example.DonationManager.infrastructure.mongo.documents.DonationDocument;
+import com.example.DonationManager.infrastructure.mongo.repositories.DonationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
