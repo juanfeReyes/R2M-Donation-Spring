@@ -1,9 +1,8 @@
 package com.example.DonationManager.application.Donation;
 
-import com.example.DonationManager.domain.Donation;
 import com.example.DonationManager.domain.DonationAudit;
-import com.example.DonationManager.infrastructure.persistence.mongo.documents.DonationDocument;
-import com.example.DonationManager.infrastructure.persistence.mongo.repositories.DonationRepository;
+import com.example.DonationManager.infrastructure.mongo.documents.DonationDocument;
+import com.example.DonationManager.infrastructure.mongo.repositories.DonationRepository;
 import com.example.DonationManager.infrastructure.searchEngine.document.DonationAuditDocument;
 import com.example.DonationManager.infrastructure.searchEngine.document.DonationAuditRepository;
 import org.springframework.beans.factory.annotation.Autowired;

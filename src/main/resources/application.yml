@@ -22,6 +22,27 @@ spring:
   redis:
     host: localhost
     port: 6379
+  cloud:
+    function.definition: RequestResourcesListener
+    stream:
+      default:
+        consumer:
+          useNativeEncoding: true
+      kafka:
+        binder:
+          autoCreateTopics: true
+          consumerProperties:
+            key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            schema.registry.url: http://localhost:8085
+            specific.avro.reader: true
+      defaultBinder: kafka
+      binder:
+        brokers: localhost
+      bindings:
+        RequestResourcesListener-in-0:
+          destination: dev.donation.pet-resource-request
+          content-type: application/*+avro
 
 
 springdoc:
