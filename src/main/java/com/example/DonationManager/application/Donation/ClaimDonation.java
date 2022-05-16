@@ -1,10 +1,8 @@
 package com.example.DonationManager.application.Donation;
 
-import com.example.DonationManager.domain.DonationAudit;
-import com.example.DonationManager.infrastructure.mongo.documents.DonationDocument;
+import com.example.DonationManager.domain.Donation;
+import com.example.DonationManager.infrastructure.mongo.documents.DonationDocumentMapper;
 import com.example.DonationManager.infrastructure.mongo.repositories.DonationRepository;
-import com.example.DonationManager.infrastructure.searchEngine.document.DonationAuditDocument;
-import com.example.DonationManager.infrastructure.searchEngine.document.DonationAuditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,27 +11,26 @@ public class ClaimDonation {
 
   private final DonationRepository donationRepository;
 
-  private final DonationAuditRepository donationAuditRepository;
+  private final DonationDocumentMapper donationDocumentMapper;
 
   @Autowired
-  public ClaimDonation(DonationRepository donationRepository,
-                       DonationAuditRepository donationAuditRepository){
+  public ClaimDonation(DonationRepository donationRepository, DonationDocumentMapper donationDocumentMapper) {
     this.donationRepository = donationRepository;
-    this.donationAuditRepository = donationAuditRepository;
+    this.donationDocumentMapper = donationDocumentMapper;
   }
 
-  public DonationAudit execute(String donationId, String claimer){
+  public Donation execute(String donationId, String claimer) {
 
-    var donation = donationRepository.findById(donationId).get();
+    var document = donationRepository.findById(donationId).get();
 
-    if(donation == null){
+    if (document == null) {
       throw new RuntimeException("Donation not found");
     }
 
-    donationRepository.delete(donation);
-    var donationAudit = new DonationAudit(DonationDocument.toEntity(donation), claimer);
+    document.setClaimerId(claimer);
+    donationRepository.save(document);
 
-    donationAuditRepository.save(DonationAuditDocument.toDocument(donationAudit));
-    return donationAudit;
+    var donation = donationDocumentMapper.donationToDomain(document);
+    return donation;
   }
 }

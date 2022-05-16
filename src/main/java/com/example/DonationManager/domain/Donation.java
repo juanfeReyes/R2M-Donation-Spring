@@ -1,14 +1,20 @@
 package com.example.DonationManager.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Getter
 @Builder
-public class Donation {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Donation implements Serializable {
 
   private String id;
 
@@ -18,5 +24,7 @@ public class Donation {
 
   private String description;
 
-  private Map<String, String> detail;
+  private String claimerId;
+
+  private List<Resource> resources;
 }
