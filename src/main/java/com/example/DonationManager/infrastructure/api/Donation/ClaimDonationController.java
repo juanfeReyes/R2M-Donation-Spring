@@ -23,7 +23,7 @@ public class ClaimDonationController {
   private final ClaimDonation claimDonation;
 
   @Autowired
-  public ClaimDonationController(ClaimDonation claimDonation){
+  public ClaimDonationController(ClaimDonation claimDonation) {
     this.claimDonation = claimDonation;
   }
 

@@ -4,20 +4,13 @@ import com.example.DonationManager.application.resource.RequestResource;
 import com.example.DonationManager.domain.resource.PriorityEnum;
 import com.example.DonationManager.domain.resource.Request;
 import com.example.DonationManager.domain.resource.Resource;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 import schemas.Pet.PetResourceRequest;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -26,10 +19,10 @@ import java.util.stream.Collectors;
 @Component
 public class RequestResourcesListener implements Consumer<Message<PetResourceRequest>> {
 
-  private RequestResource requestResource;
+  private final RequestResource requestResource;
 
   @Autowired
-  public RequestResourcesListener(RequestResource requestResource){
+  public RequestResourcesListener(RequestResource requestResource) {
     this.requestResource = requestResource;
   }
 
@@ -39,7 +32,7 @@ public class RequestResourcesListener implements Consumer<Message<PetResourceReq
       var petResourceRequest = message.getPayload();
       var request = toDomain(petResourceRequest);
       requestResource.execute(request);
-    }catch(Exception e){
+    } catch (Exception e) {
       var esecion = e;
     }
   }

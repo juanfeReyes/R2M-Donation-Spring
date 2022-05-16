@@ -8,12 +8,6 @@ spring:
       password: password
       database: shelter
       host: localhost
-    elasticsearch:
-      rest:
-        uris: elasticsearch:9200
-        read-timeout: 10s
-        username: user
-        password: secret
   security:
     oauth2:
       resourceserver:

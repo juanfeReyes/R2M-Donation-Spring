@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Document("ResourceRequest")
 @Builder
@@ -30,7 +29,7 @@ public class ResourceRequestDocument {
 
   private Date creationDate;
 
-  public static ResourceRequestDocument toDocument(Request resourceRequest){
+  public static ResourceRequestDocument toDocument(Request resourceRequest) {
     return ResourceRequestDocument.builder()
         .id(resourceRequest.getId())
         .petId(resourceRequest.getPetId())

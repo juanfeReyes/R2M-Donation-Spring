@@ -1,23 +1,25 @@
 package com.example.DonationManager.infrastructure.mongo.documents;
 
-import com.example.DonationManager.domain.Donation;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Document("Donation")
-@Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DonationDocument implements Serializable {
 
+  @Id
   private String id;
 
   private String donor;
@@ -26,25 +28,8 @@ public class DonationDocument implements Serializable {
 
   private String description;
 
-  private Map<String, String> detail;
+  private String claimerId;
 
-  public static DonationDocument toDocument(Donation donation) {
-    return DonationDocument.builder()
-        .donor(donation.getDonor())
-        .id(donation.getId())
-        .date(donation.getDate())
-        .description(donation.getDescription())
-        .detail(donation.getDetail())
-        .build();
-  }
+  private List<String> resourceIds;
 
-  public static Donation toEntity(DonationDocument document) {
-    return Donation.builder()
-        .donor(document.getDonor())
-        .id(document.getId())
-        .date(document.getDate())
-        .description(document.getDescription())
-        .detail(document.getDetail())
-        .build();
-  }
 }
